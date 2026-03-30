@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- DRIVE WHEEL MACRO  -->
+  <xacro:macro name="drive_wheel" params="prefix y_reflect axis_reflect">
+
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <parent link="base_link" />
+      <child link="${prefix}_wheel" />
+
+      <!-- Correct placement:
+           - x = 0
+           - y = ± wheel_y_offset (left/right)
+           - z = 0          (wheel center is at base_link height)
+           - rpy = -pi/2 0 0  → cylinder axis becomes horizontal (along Y) -->
+      <origin
+        xyz="${wheel_x_offset} ${y_reflect * wheel_y_offset} 0.0"
+        rpy="${-pi/2} 0.0 0.0" />
+
+      <axis xyz="0 0 ${axis_reflect}" />   <!-- rolling direction -->
+
+      <dynamics
+        friction="${wheel_friction}"
+        damping="${wheel_damping}" />
+    </joint>
+
+    <link name="${prefix}_wheel">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
+        </geometry>
+        <material name="white" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
+        </geometry>
+      </collision>
+
+      <!-- Correct cylinder inertia after -pi/2 rotation -->
+      <xacro:cylinder_inertia
+        m="${wheel_mass}"
+        r="${wheel_radius}"
+        h="${wheel_thickness}" />
+    </link>
+
+    <!-- Gazebo contact -->
+    <gazebo reference="${prefix}_wheel">
+      <mu1 value="${wheel_friction}" />
+      <mu2 value="${wheel_friction}" />
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+    </gazebo>
+
+  </xacro:macro>
+
+  <!-- Instantiate Wheels -->
+  <xacro:drive_wheel prefix="left"  y_reflect="1" axis_reflect="-1"/>
+  <xacro:drive_wheel prefix="right" y_reflect="-1" axis_reflect="-1" />
+
+</robot>

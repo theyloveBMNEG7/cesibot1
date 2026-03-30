@@ -1,0 +1,12 @@
+build/
+install/
+log/
+*.pyc
+__pycache__/
+*.so
+*.o
+*.a
+*.log
+.vscode/
+.DS_Store
+.egg-info
