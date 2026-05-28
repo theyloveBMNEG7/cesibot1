@@ -82,13 +82,13 @@ class DiffDriveNode(Node):
         # Publishers
         self.odom_pub  = self.create_publisher(Odometry,   '/odom',         10)
         self.joint_pub = self.create_publisher(JointState, '/joint_states',  10)
-        self.tf_br     = tf2_ros.TransformBroadcaster(self)
+       # self.tf_br     = tf2_ros.TransformBroadcaster(self)
 
         # Subscriber
         self.create_subscription(Twist, '/cmd_vel', self.cmd_vel_callback, 10)
 
         # Control loop at 50 Hz
-        self.create_timer(0.02, self.update)
+        self.create_timer(0.033, self.update)
 
         self.get_logger().info(
             f'DiffDrive node ready | '
@@ -264,15 +264,15 @@ class DiffDriveNode(Node):
         odom.twist.covariance[35] = 0.01   # vyaw
 
         self.odom_pub.publish(odom)
-
+        
         # Publish /tf 
-        t = TransformStamped()
-        t.header         = odom.header
-        t.child_frame_id = 'base_footprint'
-        t.transform.translation.x = self.x
-        t.transform.translation.y = self.y
-        t.transform.rotation      = odom.pose.pose.orientation
-        self.tf_br.sendTransform(t)
+        #t = TransformStamped()
+        #t.header         = odom.header
+        #t.child_frame_id = 'base_footprint'
+        #t.transform.translation.x = self.x
+        #t.transform.translation.y = self.y
+        #t.transform.rotation      = odom.pose.pose.orientation
+        #self.tf_br.sendTransform(t)
 
         # Publish /joint_states
         js = JointState()

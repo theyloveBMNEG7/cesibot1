@@ -13,7 +13,7 @@
 
      <!-- Wheel Properties-->
   <xacro:property name="wheel_radius" value="0.034"/>
-  <xacro:property name="wheel_thickness" value="0.02"/>
+  <xacro:property name="wheel_thickness" value="0.05"/>
   <xacro:property name="wheel_mass" value="0.1"/>
 
   <xacro:property name="wheel_friction" value="1.0"/>
@@ -36,12 +36,14 @@
   <xacro:property name="lidar_x" value="0.0"/>
   <xacro:property name="lidar_y" value="0.0"/>
   <xacro:property name="lidar_z" value="0.072"/>
+  <xacro:property name="lidar_yaw" value="3.14159"/>
   <xacro:property name="lidar_frame" value="laser_frame"/>
 
       <!-- IMU - BN0085-->
   <xacro:property name="imu_x" value="0.0"/>
   <xacro:property name="imu_y" value="0.0"/>
-  <xacro:property name="imu_z" value="0.026"/>
+  <xacro:property name="imu_z" value="0.068"/>
+
 
       <!-- IR -->
   <xacro:property name="ir_x" value="0.076"/>

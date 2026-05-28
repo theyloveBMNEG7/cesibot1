@@ -12,3 +12,6 @@ __pycache__/
 .egg-info
 venv/
 **/venv/
+src/camera_ros/
+src/libcamera/
+src/libcamera/

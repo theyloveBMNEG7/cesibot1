@@ -9,7 +9,7 @@
     <child  link="laser_frame" />
     <origin
       xyz="${lidar_x} ${lidar_y} ${lidar_z}"
-      rpy="0.0 0.0 0.0" />
+      rpy="0.0 0.0 ${lidar_yaw}" />
   </joint>
 
   <link name="laser_frame">

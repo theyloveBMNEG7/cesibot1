@@ -14,7 +14,7 @@ install(DIRECTORY launch/
 install(DIRECTORY config/ 
   DESTINATION share/${PROJECT_NAME}/config)
 
-install(DIRECTORY launch/ 
+install(DIRECTORY maps/ 
   DESTINATION share/${PROJECT_NAME}/maps)
 
 if(BUILD_TESTING)

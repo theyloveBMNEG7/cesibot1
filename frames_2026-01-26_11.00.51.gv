@@ -1,9 +1,0 @@
-digraph G {
-"libsurvive_world" -> "LHR-926603CA"[label=" Broadcaster: default_authority\nAverage rate: 125.468\nBuffer length: 5.029\nMost recent transform: 1769421651.901294\nOldest transform: 1769421646.872134\n"];
-"libsurvive_world" -> "LHB-5E45F85F"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
-"libsurvive_world" -> "LHB-524EF609"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
-edge [style=invis];
- subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
-"Recorded at time: 1769421651.9234805"[ shape=plaintext ] ;
-}->"libsurvive_world";
-}

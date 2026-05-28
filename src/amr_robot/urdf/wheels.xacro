@@ -8,11 +8,6 @@
       <parent link="base_link" />
       <child link="${prefix}_wheel" />
 
-      <!-- Correct placement:
-           - x = 0
-           - y = ± wheel_y_offset (left/right)
-           - z = 0          (wheel center is at base_link height)
-           - rpy = -pi/2 0 0  → cylinder axis becomes horizontal (along Y) -->
       <origin
         xyz="${wheel_x_offset} ${y_reflect * wheel_y_offset} 0.0"
         rpy="${-pi/2} 0.0 0.0" />

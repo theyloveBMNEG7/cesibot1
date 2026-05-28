@@ -1,9 +1,11 @@
 ekf_filter_node:
   ros__parameters:
-    frequency: 50.0
+    frequency: 20.0
     sensor_timeout: 0.2
+    transform_time_offset: 0.0
+    transform_timeout: 0.8
     two_d_mode: true
-    publish_tf: false
+    publish_tf: true # publishes odom to base_footprint
     map_frame: map
     odom_frame: odom
     base_link_frame: base_footprint
@@ -21,6 +23,8 @@ ekf_filter_node:
     odom0_queue_size: 10
 
     odom0_differential: false
+    
+    odom0_relative: false  
 
     odom0_nodelay: false
 
@@ -29,7 +33,7 @@ ekf_filter_node:
 
     # Order: x  y  z  roll  pitch  yaw  vx  vy  vz  vroll  vpitch  vyaw  ax  ay  az
     imu0_config: [false, false, false,
-                  false, false, true,
+                  false, false, false,
                   false, false, false,
                   false, false, true,
                   false, false, false]
@@ -37,14 +41,31 @@ ekf_filter_node:
     imu0_queue_size: 10
 
     # The BNO085 provides absolute orientation so we do NOT differentiate it
-    imu0_differential: false
+    imu0_differential: true
 
     # Remove gravity from acceleration (not needed since we ignore acceleration)
     imu0_remove_gravitational_acceleration: true
 
-    imu0_relative: false 
+    imu0_relative: false
 
     imu0_nodelay: false
-    
+
+    process_noise_covariance: [0.05, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.05, 0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.06, 0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.03, 0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.03, 0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.06, 0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.025, 0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.025, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.04, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.01, 0.0,    0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.01, 0.0,    0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.02, 0.0,    0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.01, 0.0,    0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.01, 0.0,
+                               0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.015]
+
+
     # Print debug info
     print_diagnostics: true
